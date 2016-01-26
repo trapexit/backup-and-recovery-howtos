@@ -1,11 +1,11 @@
-# Backup and Recovery
+# Backup w/ MergerFS, CrashPlan, & SnapRaid
 This document is intended to provide an example of how to setup a system to store large amounts of mostly write once / read often data with reasonably simple backup and recovery at a decent price.
 
 ## Technologies
 * [GNU/Linux (Ubuntu 14.04.3)](http://ubuntu.com)
 * [mergerfs](http://github.com/trapexit/mergerfs)
 * [CrashPlan](http://www.code42.com/crashplan)
-* [snapraid](http://www.snapraid.it) (optional)
+* [snapraid](http://www.snapraid.it)
 
 #### What and Why?
 There are many technologies in the storage space and the ease of use, cost, and reliability vary greatly. Here we'll attempt to articulate why these particular technologies were used versus others available.
@@ -82,18 +82,21 @@ We format the raw drives rather than the creating partitions for the following r
 
 #### 3. Add to /etc/fstab
 ```
-# <file system> <mount point>   <type>  <options>                        <dump>  <pass>
-/dev/sdb        /mnt/parity0     auto    defaults,users,errors=remount-ro 0       2
-/dev/sdc        /mnt/data0       auto    defaults,users,errors=remount-ro 0       2
-/dev/sdd        /mnt/data1       auto    defaults,users,errors=remount-ro 0       2
-/dev/sde        /mnt/data2       auto    defaults,users,errors=remount-ro 0       2
-/dev/sdf        /mnt/data3       auto    defaults,users,errors=remount-ro 0       2
+# <file system> <mount point>   <type>  <options>                              <dump>  <pass>
+/dev/sdb        /mnt/parity0     auto    defaults,nobootwait,errors=remount-ro 0       2
+/dev/sdc        /mnt/data0       auto    defaults,nobootwait,errors=remount-ro 0       2
+/dev/sdd        /mnt/data1       auto    defaults,nobootwait,errors=remount-ro 0       2
+/dev/sde        /mnt/data2       auto    defaults,nobootwait,errors=remount-ro 0       2
+/dev/sdf        /mnt/data3       auto    defaults,nobootwait,errors=remount-ro 0       2
 ```
+
+* nobootwait: When dealing with a lot of storage devices, especially hard drives, there are instances when the drive won't mount and that can hold up the boot process. `nobootwait` will tell the system to boot even if the drive is unavailable. Better to have a half working system than none at all.
+* errors=remount-ro: If a drive is flaky or there is some level of corruption it's probably best to immediately remount as read only so futher damage is less likely. Alternatively you can set it to `continue` or `panic`. The former will "mark the filesystem as erroneous and continue" and the latter "panic and halt the system."
 
 #### 4. Prepare mergerfs
 Add to `/etc/fstab`
 ```
-/mnt/data*  /mnt/pool  fuse.mergerfs  defaults,allow_other,moveonenospc=true  0  0
+/mnt/data*  /mnt/pool  fuse.mergerfs  defaults,allow_other,direct_io,moveonenospc=true  0  0
 ```
 
 Look at the [mergerfs readme](http://github.com/trapexit/mergerfs) for other options.
@@ -163,3 +166,17 @@ Back up open files: unchecked
 "Watch file system" is turned off is due to the overhead it can have on a system when you have lots of files. Compression is off because most every media file is already compressed.
 
 We add the raw drives as well as the specific merged directories is to handle the case of complete hard drive loss. Should a drive die you simply need to goto the drive directory and restore it to the new drive. This works around the fact that CrashPlan has no way to do a smart restore which will ignore existing files if they are already up to date nor can you filter by just files that have been lost (which will show up as deleted from your merged location).
+
+## Maintenance
+
+#### Fragmentation
+
+Over time a filesystem can become fragmented. To defrag a EXT4 filesystem use the tool `e4defrag`. It can be used while the filesystem is mounted. This should be run once in a while. Perhaps monthly via a cron job.
+
+```
+root@host:~# e4defrag
+Usage   : e4defrag [-v] file...| directory...| device...
+        : e4defrag  -c  file...| directory...| device...
+root@host:~# e4defrag -c /mnt/<drive> # Will show fragmented files and provide a score 
+root@host:~# ls -1 /mnt | xargs -n1 e4defrag -v # Will defrag all EXT4 drives mounted in /mnt
+```
