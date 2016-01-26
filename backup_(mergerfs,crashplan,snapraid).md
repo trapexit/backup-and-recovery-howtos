@@ -60,11 +60,11 @@ TBD
 ## Setup
 ---
 #### 1. Format the drives
-Neither MergerFS or CrashPlan doesn't care about the filesystem however SnapRaid does. EXT4 is probably the best overall filesystem right now for this setup. Especially given many recovery tools understand EXT{2,3,4} filesystems.
+Neither MergerFS or CrashPlan care about the filesystem type however SnapRaid does. EXT4 is probably the best overall filesystem right now for this setup. Especially given many recovery tools understand EXT{2,3,4} filesystems.
 ```
 # mkfs.ext4 -m 0 -T largefile4 /dev/sd{b,c,d,e,f}
 ```
-The `-m 0` is to keep mkfs.ext4 from reserving capacity for root which means you'll be able to use as much of the disk as possible. `-T largefile4` is optional but useful when you expect to have fewer large files versus many small or average size files. It saves some space. Valid options for `-T` and what they mean are found in the `fs_types` section of `/etc/mke2fs.conf`.
+The `-m 0` is to keep mkfs.ext4 from reserving capacity for root which means you'll be able to use as much of the disk as possible. `-T largefile4` is optional but useful when you expect to have fewer large files versus many small or average size files. It saves some space. Valid options for `-T` and what they mean are found in the `fs_types` section of `/etc/mke2fs.conf`.  If unsure what would be best for your setup simply leave out `-T largefile4`.
 
 We format the raw drives rather than the creating partitions for the following reasons.
 
@@ -82,12 +82,12 @@ We format the raw drives rather than the creating partitions for the following r
 
 #### 3. Add to /etc/fstab
 ```
-# <file system> <mount point>   <type>  <options>                              <dump>  <pass>
-/dev/sdb        /mnt/parity0     auto    defaults,nobootwait,errors=remount-ro 0       2
-/dev/sdc        /mnt/data0       auto    defaults,nobootwait,errors=remount-ro 0       2
-/dev/sdd        /mnt/data1       auto    defaults,nobootwait,errors=remount-ro 0       2
-/dev/sde        /mnt/data2       auto    defaults,nobootwait,errors=remount-ro 0       2
-/dev/sdf        /mnt/data3       auto    defaults,nobootwait,errors=remount-ro 0       2
+# <file system>  <mount point>  <type>  <options>                              <dump>  <pass>
+/dev/sdb         /mnt/parity0   auto    defaults,nobootwait,errors=remount-ro  0       2
+/dev/sdc         /mnt/data0     auto    defaults,nobootwait,errors=remount-ro  0       2
+/dev/sdd         /mnt/data1     auto    defaults,nobootwait,errors=remount-ro  0       2
+/dev/sde         /mnt/data2     auto    defaults,nobootwait,errors=remount-ro  0       2
+/dev/sdf         /mnt/data3     auto    defaults,nobootwait,errors=remount-ro  0       2
 ```
 
 * nobootwait: When dealing with a lot of storage devices, especially hard drives, there are instances when the drive won't mount and that can hold up the boot process. `nobootwait` will tell the system to boot even if the drive is unavailable. Better to have a half working system than none at all.
