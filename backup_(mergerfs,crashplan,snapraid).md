@@ -166,17 +166,3 @@ Back up open files: unchecked
 "Watch file system" is turned off is due to the overhead it can have on a system when you have lots of files. Compression is off because most every media file is already compressed.
 
 We add the raw drives as well as the specific merged directories is to handle the case of complete hard drive loss. Should a drive die you simply need to goto the drive directory and restore it to the new drive. This works around the fact that CrashPlan has no way to do a smart restore which will ignore existing files if they are already up to date nor can you filter by just files that have been lost (which will show up as deleted from your merged location).
-
-## Maintenance
-
-#### Fragmentation
-
-Over time a filesystem can become fragmented. To defrag a EXT4 filesystem use the tool `e4defrag`. It can be used while the filesystem is mounted. This should be run once in a while. Perhaps monthly via a cron job.
-
-```
-root@host:~# e4defrag
-Usage   : e4defrag [-v] file...| directory...| device...
-        : e4defrag  -c  file...| directory...| device...
-root@host:~# e4defrag -c /mnt/<drive> # Will show fragmented files and provide a score 
-root@host:~# ls -1 /mnt | xargs -n1 e4defrag -v # Will defrag all EXT4 drives mounted in /mnt
-```
