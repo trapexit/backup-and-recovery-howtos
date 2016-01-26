@@ -11,6 +11,7 @@ Usage   : e4defrag [-v] file...| directory...| device...
         : e4defrag  -c  file...| directory...| device...
 root@host:~# e4defrag -c /mnt/<drive> # Will show fragmented files and provide a score 
 root@host:~# ls -1 /mnt | xargs -n1 e4defrag -v # Will defrag all EXT4 drives mounted in /mnt
+```
 
 ### Directory Optimization
 
