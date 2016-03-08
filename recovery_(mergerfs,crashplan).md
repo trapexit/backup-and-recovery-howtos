@@ -1,5 +1,4 @@
 # Recovery w/ MergerFS & CrashPlan
----
 
 This assumes a setup similar to what is described [here](backup_(mergerfs,crashplan).md).
 
