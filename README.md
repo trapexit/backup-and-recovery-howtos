@@ -21,6 +21,7 @@
 
 ### Recovery Howtos
 * [MergerFS & CrashPlan](recovery_(mergerfs,crashplan).md)
+* [MergerFS & SnapRaid](recovery_(mergerfs,snapraid).md)
 * [MergerFS, CrashPlan, & SnapRaid](recovery_(mergerfs,crashplan,snapraid).md)
 * [EXT4](recovery_(ext4).md)
 * [ZFS](recovery_(zfs).md)
