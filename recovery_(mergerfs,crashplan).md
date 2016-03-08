@@ -1,8 +1,9 @@
-# Recovery using MergerFS & CrashPlan
+# Recovery w/ MergerFS & CrashPlan
+---
 
 This assumes a setup similar to what is described [here](backup_(mergerfs,crashplan).md).
 
-### Whole drive recovery
+### Full drive recovery
 
 #### Initial state
 
@@ -31,4 +32,4 @@ This assumes a setup similar to what is described [here](backup_(mergerfs,crashp
 8. Navigate in the file viewer to `/mnt/2TB-WDC-0` and select the directory
 9. Click `Desktop` till `a folder (Desktop)` appears. Click on `(Desktop)` and select `/mnt/8TB-Seagate-0`
 10. Click `Restore`
-11. Wait
+11. Wait for CrashPlan to restore all files
