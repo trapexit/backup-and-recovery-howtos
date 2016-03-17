@@ -31,3 +31,4 @@
 ### Maintenance Howtos
 * [EXT4](maintenance_(ext4).md)
 * [MergerFS](maintenance_(mergerfs).md)
+* [SnapRaid](maintenance_(snapraid).md)
