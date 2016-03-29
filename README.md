@@ -32,3 +32,10 @@
 * [EXT4](maintenance_(ext4).md)
 * [MergerFS](maintenance_(mergerfs).md)
 * [SnapRaid](maintenance_(snapraid).md)
+
+### Setup Howtos
+* [Storage devices](setup_(storage_device).md)
+* [EXT4](setup_(ext4).md)
+* [MergerFS](setup_(mergerfs).md)
+* [SnapRaid](setup_(snapraid).md)
+* [CrashPlan](setup_(crashplan).md)
