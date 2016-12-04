@@ -59,3 +59,45 @@ Currently as the ammount of data backed up increases the slower the deduplicatio
 * Save the file.
 * Restart the CrashPlan service. (Ubuntu: `sudo service crashplan restart`)
 
+#### Parallel backups & restores
+CrashPlan only backs up one file at a time and will disable backups while restoring. Generally this is not a problem but if you have a very large set of files to back up and have the "Family" subscription you can install multiple instances of CrashPlan on the same machine but have CrashPlan think they are different machines.
+
+Instead of one instance with N backup sets you can setup a few instances each with fewer backup sets. This can be used also to temporarily create a new instance so you can continue backing up with the original and restore data with the temp instance.
+
+The easiest way to install multiple instances is to use Docker as described above. Simply create multiple instances with different names and different host ports. 
+
+For example:
+
+```
+$ docker run -d --name=crashplan-music \
+  --net=bridge \
+  --restart=unless-stopped \
+  -p 4242:4242 \
+  -p 4243:4243 \
+  -p 4280:4280 \
+  -v /mnt:/mnt \
+  -v /path/to/storage:/storage \
+  gfjardim/crashplan
+$ docker run -d --name=crashplan-movies \
+  --net=bridge \
+  --restart=unless-stopped \
+  -p 5242:4242 \
+  -p 5243:4243 \
+  -p 5280:4280 \
+  -v /mnt:/mnt \
+  -v /path/to/storage:/storage \
+  gfjardim/crashplan
+$ docker run -d --name=crashplan-photos \
+  --net=bridge \
+  --restart=unless-stopped \
+  -p 6242:4242 \
+  -p 6243:4243 \
+  -p 6280:4280 \
+  -v /mnt:/mnt \
+  -v /path/to/storage:/storage \
+  gfjardim/crashplan
+```
+
+Connect to their GUIs usings ports 4280, 5280, and 6280 for music, movie, and photo instances respectively.
+
+Remember that each instance takes up a not insignificant amount of memory and CPU so this setup should only be used if you have decent amount of RAM and CPU available or only temporarily when restoring.
