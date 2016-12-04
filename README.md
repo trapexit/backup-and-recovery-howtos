@@ -37,6 +37,7 @@
 ### Setup Howtos
 * [Storage devices](setup_(storage_device).md)
 * [EXT4](setup_(ext4).md)
+* [/etc/fstab](setup_(fstab).md)
 * [MergerFS](setup_(mergerfs).md)
 * [SnapRaid](setup_(snapraid).md)
 * [CrashPlan](setup_(crashplan).md)
