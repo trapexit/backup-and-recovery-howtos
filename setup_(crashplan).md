@@ -52,12 +52,16 @@ There are some limitations with how CrashPlan restores files. It doesn't allow a
 When a drive dies you can simply replace the drive and instruct CrashPlan to restore files from the dead source drives mount point to the new one. Specifics can be found in the [mergerfs & CrashPlan recovery guide](recovery_(mergerfs,crashplan).md).
 
 #### Improving backup performance
+
 Currently as the ammount of data backed up increases the slower the deduplication behavior by CrashPlan becomes and at the came time CPU utilization increases. While not ideal, until CrashPlan addresses this issue sufficiently, one can effectively disable data deduplication and speedup the backup procedure.
 
 * Open `/usr/local/crashplan/conf/my.service.xml`
 * Search for and change each `dataDeDupAutoMaxFileSizeForWan` value found to `1`. (`0` appears to mean `infinite`)
 * Save the file.
 * Restart the CrashPlan service. (Ubuntu: `sudo service crashplan restart`)
+
+**NOTE:** Turning off de-duplication is not supported by Code42.
+https://support.code42.com/CrashPlan/4/Configuring/Unsupported_Changes_To_CrashPlan_De-Duplication_Settings
 
 #### Parallel backups & restores
 CrashPlan only backs up one file at a time and will disable backups while restoring. Generally this is not a problem but if you have a very large set of files to back up and have the "Family" subscription you can install multiple instances of CrashPlan on the same machine but have CrashPlan think they are different machines.
