@@ -18,8 +18,6 @@ There are several docker images up on [DockerHub](http://hub.docker.com). Some u
 $ docker run -d --name=crashplan \
   --net=bridge \
   --restart=unless-stopped \
-  -p 4242:4242 \
-  -p 4243:4243 \
   -p 4280:4280 \
   -v /mnt:/mnt \
   -v /path/to/storage:/storage \
