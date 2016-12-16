@@ -76,8 +76,6 @@ For example:
 $ docker run -d --name=crashplan-music \
   --net=bridge \
   --restart=unless-stopped \
-  -p 4242:4242 \
-  -p 4243:4243 \
   -p 4280:4280 \
   -v /mnt:/mnt \
   -v /path/to/storage:/storage \
@@ -85,8 +83,6 @@ $ docker run -d --name=crashplan-music \
 $ docker run -d --name=crashplan-movies \
   --net=bridge \
   --restart=unless-stopped \
-  -p 5242:4242 \
-  -p 5243:4243 \
   -p 5280:4280 \
   -v /mnt:/mnt \
   -v /path/to/storage:/storage \
@@ -94,8 +90,6 @@ $ docker run -d --name=crashplan-movies \
 $ docker run -d --name=crashplan-photos \
   --net=bridge \
   --restart=unless-stopped \
-  -p 6242:4242 \
-  -p 6243:4243 \
   -p 6280:4280 \
   -v /mnt:/mnt \
   -v /path/to/storage:/storage \
