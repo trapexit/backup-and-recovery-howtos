@@ -12,19 +12,25 @@
 * The installer will setup CrashPlan to start automatically when your system boots.
 
 #### Docker Install
-There are several docker images up on [DockerHub](http://hub.docker.com). Some use only the non-gui backup engine while a few use software such as NoVNC to provide a way to more easily access the GUI. One I've had success with is [gfjardim/crashplan](https://hub.docker.com/r/gfjardim/crashplan/).
+There are several docker images up on [DockerHub](http://hub.docker.com). Some use only the non-gui backup engine while a few use software such as NoVNC to provide a way to more easily access the GUI.
+
+In the following examples we'll use [trapexit's CrashPlan image](https://hub.docker.com/r/trapexit/crashplan/).
 
 ```
-$ docker run -d --name=crashplan \
-  --net=bridge \
+$ docker run -d \
+  --name=crashplan \
   --restart=unless-stopped \
-  -p 4280:4280 \
+  -e NOVNC=true \
+  -p 5900:5900 \
+  -p 6080:6080 \
   -v /mnt:/mnt \
-  -v /path/to/storage:/storage \
-  gfjardim/crashplan
+  -v /media:/media \
+  -v /:/rootfs \
+  trapexit/crashplan
 ```
 
-To connect to the GUI head to http://yourserversip:4280/vnc.html
+To connect to the GUI head to http://yourserversip:6080/vnc.html?autoconnect=true&resize=scale
+Or if you wish not to use `NoVNC` then exclude `-e NOVNC=true` and `-p 6080:6080` and use your preferred VNC client.
 
 ### General Setup
 1. Open GUI
@@ -71,29 +77,38 @@ The easiest way to install multiple instances is to use Docker as described abov
 For example:
 
 ```
-$ docker run -d --name=crashplan-music \
-  --net=bridge \
+$ docker run -d \
+  --name=crashplan-0 \
   --restart=unless-stopped \
-  -p 4280:4280 \
+  -e NOVNC=true \
+  -p 5900:5900 \
+  -p 6080:6080 \
   -v /mnt:/mnt \
-  -v /path/to/storage:/storage \
-  gfjardim/crashplan
-$ docker run -d --name=crashplan-movies \
-  --net=bridge \
+  -v /media:/media \
+  -v /:/rootfs \
+  trapexit/crashplan
+$ docker run -d \
+  --name=crashplan-1 \
   --restart=unless-stopped \
-  -p 5280:4280 \
+  -e NOVNC=true \
+  -p 5901:5900 \
+  -p 6081:6080 \
   -v /mnt:/mnt \
-  -v /path/to/storage:/storage \
-  gfjardim/crashplan
-$ docker run -d --name=crashplan-photos \
-  --net=bridge \
+  -v /media:/media \
+  -v /:/rootfs \
+  trapexit/crashplan
+$ docker run -d \
+  --name=crashplan-2 \
   --restart=unless-stopped \
-  -p 6280:4280 \
+  -e NOVNC=true \
+  -p 5902:5900 \
+  -p 6082:6080 \
   -v /mnt:/mnt \
-  -v /path/to/storage:/storage \
-  gfjardim/crashplan
+  -v /media:/media \
+  -v /:/rootfs \
+  trapexit/crashplan
 ```
 
-Connect to their GUIs usings ports 4280, 5280, and 6280 for music, movie, and photo instances respectively.
+Or use the [convenience script provided by trapexit](https://raw.githubusercontent.com/trapexit/dockerfile-crashplan/master/create-crashplan-container).
 
 Remember that each instance takes up a not insignificant amount of memory and CPU so this setup should only be used if you have decent amount of RAM and CPU available or only temporarily when restoring.
