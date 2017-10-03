@@ -20,6 +20,7 @@
   * offsite backup via CrashPlan
 
 ### Recovery Howtos
+* [MergerFS](docs/recovery_(mergerfs).md)
 * [MergerFS & CrashPlan](docs/recovery_(mergerfs,crashplan).md)
 * [MergerFS & SnapRaid](docs/recovery_(mergerfs,snapraid).md)
 * [MergerFS, CrashPlan, & SnapRaid](docs/recovery_(mergerfs,crashplan,snapraid).md)
