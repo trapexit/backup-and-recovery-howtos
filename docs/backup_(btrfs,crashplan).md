@@ -77,4 +77,4 @@ UUID=3a6b5f69-23bc-4698-a945-d06062aa5ff6 /mnt/storage   btrfs    defaults    0 
 ```
 
 #### 4. Prepare CrashPlan
-Follow the [CrashPlan setup guide](setup_(crashplan).md). Create a "backup set" for each type of data you wish to backup (phtoos, music, etc.).
+Follow the [CrashPlan setup guide](setup_(crashplan).md). Create a "backup set" for each type of data you wish to backup (photos, music, etc.).
