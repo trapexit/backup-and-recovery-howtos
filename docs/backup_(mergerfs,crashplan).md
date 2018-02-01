@@ -78,4 +78,4 @@ Look at the [mergerfs readme](https://github.com/trapexit/mergerfs#options) for 
 
 #### 6. Prepare CrashPlan
 
-Follow the [CrashPlan setup guide](setup_(crashplan).md). Create a "backup set" for each type of data you wish to backup (phtoos, music, etc.) and for each source drive (/mnt/data{0,1,2,3}).
+Follow the [CrashPlan setup guide](setup_(crashplan).md). Create a "backup set" for each type of data you wish to backup (photos, music, etc.) and for each source drive (/mnt/data{0,1,2,3}).
