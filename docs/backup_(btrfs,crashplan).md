@@ -13,9 +13,9 @@ There are many technologies in the storage space and the ease of use, cost, and 
 ###### What?
 Btrfs is a modern copy on write (CoW) filesystem for Linux aimed at implementing advanced features while also focusing on fault tolerance, repair and easy administration.
 ###### Why?
-BTRFS will be used for pooling and also for the filesystem. The data modell will be RAID5, but BTRFS has the flexbility to switch between data models if needed eg. RAID1 to RAID5/6.
+BTRFS will be used for pooling and also for the filesystem. The data model will be RAID5, but BTRFS has the flexbility to switch between data models if needed eg. RAID1 to RAID5/6.
 * **Why not EXT4/XFS?**
-Can't manage the pooling.
+Can't manage the pooling, LVM (logical volume management), snapshotting, bitrot detection.
 * **Why not mergerfs?**
 Can't switch between data models and lack of advanced features like snapshots and subvolumes, plus BTRFS can be used for pooling and for the FS at the same time.
 * **Why not AUFS/MHDDFS/hardware or software RAID0?**  
@@ -33,7 +33,8 @@ Let's assume we have the following hardware setup.
 * 4 drives
   * boot/os drive: /dev/sda
   * data drives: /dev/sd{b,c,d}
-* Sizes of the drives are uniform. NOTE: You can use devices of different sizes, but striped RAID levels (RAID-0/10/5/6) may not use all of the available space on the devices.
+* Sizes of the drives are uniform.
+NOTE: You can use devices of different sizes, but striped RAID levels (RAID-0/10/5/6) may not use all of the available space on the devices.
 
 ## Setup
 ---
