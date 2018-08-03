@@ -15,7 +15,7 @@
 * [ZFS & CrashPlan](docs/backup_(zfs,crashplan).md) (TBD):
   * pooled storage, corruption detection/correcton, redundency w/ ZFS
   * offsite backup via CrashPlan
-* [BTRFS & CrashPlan](docs/backup_(btrfs,crashplan).md) (TBD):
+* [BTRFS & CrashPlan](docs/backup_(btrfs,crashplan).md):
   * pooled storage, corruption detection/correcton, redundency w/ BTRFS
   * offsite backup via CrashPlan
 
