@@ -29,6 +29,13 @@
 * [BTRFS](docs/recovery_(btrfs).md)
 * [MBR/GPT](docs/recovery_(mbr,gpt).md)
 
+### Managing Bit Rot
+* [scorch](docs/bitrot_(scorch).md)
+* [SnapRaid](docs/bitrot_(snapraid).md)
+* [Par2](docs/bitrot_(par2).md)
+* [Btrfs](docs/bitrot_(btrfs).md)
+* [ZFS](docs/bitrot_(zfs).md)
+
 ### Maintenance Howtos
 * [EXT4](docs/maintenance_(ext4).md)
 * [Btrfs](docs/maintenance_(btrfs).md)
