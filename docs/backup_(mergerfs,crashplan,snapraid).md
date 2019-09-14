@@ -96,7 +96,7 @@ We format the raw drives rather than the creating partitions for the following r
 #### 4. Prepare mergerfs
 Add to `/etc/fstab`
 ```
-/mnt/data*  /mnt/pool  fuse.mergerfs  defaults,allow_other,direct_io,moveonenospc=true  0  0
+/mnt/data*  /mnt/pool  fuse.mergerfs  defaults,allow_other,cache.files=off,moveonenospc=true  0  0
 ```
 
 Look at the [mergerfs readme](http://github.com/trapexit/mergerfs) for other options.
