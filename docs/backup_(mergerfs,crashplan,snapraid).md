@@ -90,7 +90,7 @@ We format the raw drives rather than the creating partitions for the following r
 /dev/sdf         /mnt/data3     auto    defaults,nobootwait,errors=remount-ro  0       2
 ```
 
-* nobootwait: When dealing with a lot of storage devices, especially hard drives, there are instances when the drive won't mount and that can hold up the boot process. `nobootwait` will tell the system to boot even if the drive is unavailable. Better to have a half working system than none at all.
+* nobootwait: When dealing with a lot of storage devices, especially hard drives, there are instances when the drive won't mount and that can hold up the boot process. `nobootwait` or `nofail` (varies depending on OS) will tell the system to boot even if the drive is unavailable. Better to have a half working system than none at all.
 * errors=remount-ro: If a drive is flaky or there is some level of corruption it's probably best to immediately remount as read only so futher damage is less likely. Alternatively you can set it to `continue` or `panic`. The former will "mark the filesystem as erroneous and continue" and the latter "panic and halt the system."
 
 #### 4. Prepare mergerfs
