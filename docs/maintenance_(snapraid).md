@@ -12,7 +12,7 @@ With SnapRaid the data on the drives need to have parity information calculated 
 
 It's probably best to do this nightly (or weekly if your data doesn't change much). 
 
-[zackreed.me](http://zackreed.me/articles/83-updated-snapraid-sync-script) has a tutorial and custom script which will largely automate running of sync and verifying data.
+[zackreed.me](https://zackreed.me/snapraid-split-parity-sync-script/) has a tutorial and custom script which will largely automate running of sync and verifying data.
 
 ### Scrubbing
 
