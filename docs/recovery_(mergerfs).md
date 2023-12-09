@@ -21,7 +21,7 @@ For the situation where you have the ability to have the original drive and the 
 or  
 `$ sudo mergerfs.ctl add path /mnt/data3`
 3. Use `rsync` or similar to copy data  
-`$ sudo rsync -avxHAXWES --numeric-ids --info=progress2 /mnt/data1/ /mnt/data3/`
+`$ sudo rsync -avxHAXWE --numeric-ids --info=progress2 /mnt/data1/ /mnt/data3/`
 4. Run rsync again to confirm no files changed while the copy happened.
 5. Remove the old drive  
 `$ sudo xattr -w user.mergerfs.srcmounts -/mnt/data1 /mnt/pool/.mergerfs`  
@@ -48,7 +48,7 @@ For the situation where you are removing a drive completely or you are unable to
 `$ mkdir -p /tmp/tmp_pool`  
 `$ sudo mergerfs -o <options> /mnt/data0:/mnt/data2 /tmp/tmp_pool`
 3. Use `rsync` or similar to copy data from the drive to remove into the temporary pool  
-`$ sudo rsync -avxHAXWES --numeric-ids --info=progress2 /mnt/data1/ /tmp/tmp_pool/`
+`$ sudo rsync -avxHAXWE --numeric-ids --info=progress2 /mnt/data1/ /tmp/tmp_pool/`
 4. Run rsync again to confirm no files changed while the copy happened. 
 5. Remove the old drive from the main pool.  
 `$ sudo xattr -w user.mergerfs.srcmounts -/mnt/data1 /mnt/pool/.mergerfs`  
